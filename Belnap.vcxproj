@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\belnap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\belnap.cpp" />
+    <ClCompile Include="tests\tests.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{2996E7E8-ED9B-42C2-8F67-7EDF64892B87}</ProjectGuid>
@@ -88,7 +95,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:/CSIL/Belnap/Belnap/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:/CSIL/Belnap/Belnap/Include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,13 +146,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="tests.cpp" />
-    <ClCompile Include="belnap.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="belnap.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
