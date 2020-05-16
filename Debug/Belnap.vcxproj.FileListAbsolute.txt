@@ -1,0 +1,2 @@
+C:\CSIL\Belnap\Belnap\Debug\Belnap.exe
+C:\CSIL\Belnap\Belnap\Debug\Belnap.pdb
