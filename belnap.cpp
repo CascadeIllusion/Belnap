@@ -131,4 +131,5 @@ namespace belnap {
 }
 
 int main() {
+
 }
