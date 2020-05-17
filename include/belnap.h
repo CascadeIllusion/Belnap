@@ -51,18 +51,67 @@ public:
 		return out;
 	}
 
+	// Creates a unary Belnap operator
+	static std::function<Belnap<T>(Belnap<T>)> createOperator(char table[2][4]) {
+
+		State values[4];
+
+		for (int i = 0; i <= 3; i++) {
+			// Use the second row to ignore the input row
+			switch (table[1][i]) {
+			case 'N':
+				values[i] = State::Neither;
+				break;
+			case 'F':
+				values[i] = State::False;
+				break;
+			case 'T':
+				values[i] = State::True;
+				break;
+			case 'B':
+				values[i] = State::Both;
+				break;
+			default:
+				// TODO: Exception
+				break;
+			}
+		}
+
+		return [=](Belnap<T> arg) {
+			return values[arg.getState() + 1];
+		};
+
+	}
+
+	// Belnap NOT Gate
+	friend Belnap<T> operator!(Belnap<T> arg) {
+
+		char Table[2][4] = {
+		{'N', 'F', 'T', 'B'},
+		{'N', 'T', 'F', 'B'},
+		};
+
+		auto Operator = createOperator(Table);
+
+		return Operator(arg);
+
+	}
+
+	// Creates a binary Belnap operator
 	static std::function<Belnap<T>(Belnap<T>, Belnap<T>)> createOperator(char table[5][5]) {
 
 		State values[4][4];
 
-		for (int i = 0; i <= 5; i++) {
+		for (int i = 0; i <= 4; i++) {
 
+			// Ignore the input row
 			if (i == 0) {
 				continue;
 			}
 
-			for (int j = 0; j <= 5; j++) {
+			for (int j = 0; j <= 4; j++) {
 
+				// Ignore the input column
 				if (j == 0) {
 					continue;
 				}
@@ -95,9 +144,10 @@ public:
 
 	}
 
+	// Belnap AND Gate
 	friend Belnap<T> operator&&(Belnap<T> arg1, Belnap<T> arg2) {
 
-		char andTable[5][5] = {
+		char Table[5][5] = {
 		{' ', 'N', 'F', 'T', 'B'},
 		{'N', 'N', 'F', 'N', 'F'},
 		{'F', 'F', 'F', 'F', 'F'},
@@ -105,15 +155,16 @@ public:
 		{'B', 'F', 'F', 'B', 'B'},
 		};
 
-		auto andOperator = createOperator(andTable);
+		auto Operator = createOperator(Table);
 
-		return andOperator(arg1, arg2);
+		return Operator(arg1, arg2);
 
 	}
 
+	// Belnap OR Gate
 	friend Belnap<T> operator||(Belnap<T> arg1, Belnap<T> arg2) {
 
-		char orTable[5][5] = {
+		char Table[5][5] = {
 		{' ', 'N', 'F', 'T', 'B'},
 		{'N', 'N', 'N', 'T', 'T'},
 		{'F', 'N', 'F', 'T', 'B'},
@@ -121,9 +172,9 @@ public:
 		{'B', 'T', 'B', 'T', 'B'},
 		};
 
-		auto orOperator = createOperator(orTable);
+		auto Operator = createOperator(Table);
 
-		return orOperator(arg1, arg2);
+		return Operator(arg1, arg2);
 
 	}
 
