@@ -1,2 +1,5 @@
-#include "belnap.h"
 #include <cassert>
+#include "belnap.h"
+
+void testAnd() {
+}

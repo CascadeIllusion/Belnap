@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\belnap.h" />
+    <ClInclude Include="include\tests.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\belnap.cpp" />
