@@ -42,14 +42,16 @@ public:
 
 	friend bool operator== (Belnap arg1, Belnap arg2);
 
+	friend bool operator!= (Belnap arg1, Belnap arg2);
+
 	// Creates a unary Belnap operator
-	static std::function<Belnap(Belnap)> createOperator(char table[2][4]);
+	static std::function<Belnap(Belnap)> createOperator(const char table[2][4]);
 
 	// Belnap NOT Gate
 	friend Belnap operator!(Belnap arg);
 
 	// Creates a binary Belnap operator
-	static std::function<Belnap(Belnap, Belnap)> createOperator(char table[5][5]);
+	static std::function<Belnap(Belnap, Belnap)> createOperator(const char table[5][5]);
 
 	// Belnap AND Gate
 	friend Belnap operator&&(Belnap arg1, Belnap arg2);

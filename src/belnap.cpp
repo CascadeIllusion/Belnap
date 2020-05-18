@@ -1,4 +1,5 @@
 #include "belnap.h"
+#include "tables.h"
 #include "tests.h"
 
 Belnap::Belnap(State state) {
@@ -23,7 +24,11 @@ bool operator==(Belnap arg1, Belnap arg2) {
 	return arg1.getState() == arg2.getState();
 }
 
-std::function<Belnap(Belnap)> Belnap::createOperator(char table[2][4]) {
+bool operator!=(Belnap arg1, Belnap arg2) {
+	return operator==(arg1, arg2);
+}
+
+std::function<Belnap(Belnap)> Belnap::createOperator(const char table[2][4]) {
 	State values[4];
 
 	for (int i = 0; i <= 3; i++) {
@@ -54,17 +59,13 @@ std::function<Belnap(Belnap)> Belnap::createOperator(char table[2][4]) {
 
 Belnap operator!(Belnap arg) {
 
-	char Table[2][4] = {
-		{'N', 'F', 'T', 'B'},
-		{'N', 'T', 'F', 'B'},
-	};
-
-	auto Operator = Belnap::createOperator(Table);
+	auto Operator = Belnap::createOperator(TableNOT);
 
 	return Operator(arg);
+
 }
 
-std::function<Belnap(Belnap, Belnap)> Belnap::createOperator(char table[5][5]) {
+std::function<Belnap(Belnap, Belnap)> Belnap::createOperator(const char table[5][5]) {
 
 	State values[4][4];
 
@@ -111,35 +112,21 @@ std::function<Belnap(Belnap, Belnap)> Belnap::createOperator(char table[5][5]) {
 }
 
 Belnap operator&&(Belnap arg1, Belnap arg2) {
-	char Table[5][5] = {
-		{' ', 'N', 'F', 'T', 'B'},
-		{'N', 'N', 'F', 'N', 'F'},
-		{'F', 'F', 'F', 'F', 'F'},
-		{'T', 'N', 'F', 'T', 'B'},
-		{'B', 'F', 'F', 'B', 'B'},
-	};
 
-	auto Operator = Belnap::createOperator(Table);
+	auto Operator = Belnap::createOperator(TableAND);
 
 	return Operator(arg1, arg2);
+
 }
 
 Belnap operator||(Belnap arg1, Belnap arg2) {
 
-	char Table[5][5] = {
-	{' ', 'N', 'F', 'T', 'B'},
-	{'N', 'N', 'N', 'T', 'T'},
-	{'F', 'N', 'F', 'T', 'B'},
-	{'T', 'T', 'T', 'T', 'T'},
-	{'B', 'T', 'B', 'T', 'B'},
-	};
-
-	auto Operator = Belnap::createOperator(Table);
+	auto Operator = Belnap::createOperator(TableOR);
 
 	return Operator(arg1, arg2);
 
 }
 
 int main() {
-	testAnd();
+
 }
