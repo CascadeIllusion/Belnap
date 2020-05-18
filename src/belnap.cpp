@@ -88,6 +88,12 @@ Belnap operator!(Belnap arg) {
 
 }
 
+Belnap Belnap::conflation(Belnap arg) {
+	auto Operator = Belnap::createOperator(TableConflation);
+
+	return Operator(arg);
+}
+
 std::function<Belnap(Belnap, Belnap)> Belnap::createOperator(const char table[5][5]) {
 
 	State values[4][4];
@@ -148,6 +154,27 @@ Belnap operator||(Belnap arg1, Belnap arg2) {
 
 	return Operator(arg1, arg2);
 
+}
+
+Belnap Belnap::exclusiveOr(Belnap arg1, Belnap arg2) {
+
+	auto Operator = Belnap::createOperator(TableXOR);
+
+	return Operator(arg1, arg2);
+}
+
+Belnap Belnap::consensus(Belnap arg1, Belnap arg2) {
+
+	auto Operator = Belnap::createOperator(TableConsensus);
+
+	return Operator(arg1, arg2);
+}
+
+Belnap Belnap::gullibility(Belnap arg1, Belnap arg2) {
+
+	auto Operator = Belnap::createOperator(TableGullibility);
+
+	return Operator(arg1, arg2);
 }
 
 int main() {

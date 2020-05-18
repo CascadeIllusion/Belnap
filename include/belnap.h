@@ -51,6 +51,9 @@ public:
 	// Belnap NOT Gate
 	friend Belnap operator!(Belnap arg);
 
+	// Belnap Conflation Gate
+	static Belnap conflation(Belnap arg);
+
 	// Creates a binary Belnap operator
 	static std::function<Belnap(Belnap, Belnap)> createOperator(const char table[5][5]);
 
@@ -60,6 +63,14 @@ public:
 	// Belnap OR Gate
 	friend Belnap operator||(Belnap arg1, Belnap arg2);
 
+	// Belnap XOR Gate
+	static Belnap exclusiveOr(Belnap arg1, Belnap arg2);
+
+	// Belnap Consensus Gate
+	static Belnap consensus(Belnap arg1, Belnap arg2);
+
+	// Belnap Gullibility Gate
+	static Belnap gullibility(Belnap arg1, Belnap arg2);
 };
 
 void testAnd();
