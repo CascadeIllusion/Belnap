@@ -1,6 +1,7 @@
 #ifndef BELNAP_H
 #define BELNAP_H
 
+#include "tables.h"
 #include <iostream>
 #include <functional>
 
@@ -9,12 +10,14 @@ const enum State {
 	BFalse = 0,
 	BTrue = 1,
 	BBoth = 2,
+	BInvalid = 3,
 };
 
 constexpr State Neither = State::BNeither;
 constexpr State False = State::BFalse;
 constexpr State True = State::BTrue;
 constexpr State Both = State::BBoth;
+constexpr State Invalid = State::BInvalid;
 
 class Belnap {
 
@@ -22,21 +25,19 @@ private:
 
 	State state;
 
-	enum class EvalContext {
-		TowardsBoth, // Both = true; neither = false
-		TowardsNeither, // Both = false; neither = true
-		TowardsFalse, // Both and neither = false
-		TowardsTrue, // Both and neither = true
-		Error, // Throw an exception when attempting to evaluate
-	};
-
 public:
 
 	Belnap(State state);
 
+	Belnap(int state);
+
 	State getState();
 
 	void operator= (State state);
+
+	void operator= (int state);
+
+	static State charToState(char state);
 
 	friend std::ostream& operator<<(std::ostream& out, Belnap belnap);
 

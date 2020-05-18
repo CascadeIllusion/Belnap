@@ -1,9 +1,12 @@
 #include "belnap.h"
-#include "tables.h"
 #include "tests.h"
 
 Belnap::Belnap(State state) {
 	this->state = state;
+}
+
+Belnap::Belnap(int state) {
+	this->state = static_cast<State>(state);
 }
 
 State Belnap::getState() {
@@ -12,6 +15,26 @@ State Belnap::getState() {
 
 void Belnap::operator=(State state) {
 	this->state = state;
+}
+
+void Belnap::operator=(int state) {
+	this->state = static_cast<State>(state);
+}
+
+State Belnap::charToState(char state) {
+	switch (state) {
+	case 'N':
+		return Neither;
+	case 'F':
+		return False;
+	case 'T':
+		return True;
+	case 'B':
+		return Both;
+	default:
+		// TODO: Exception
+		return Invalid;
+	}
 }
 
 std::ostream& operator<<(std::ostream& out, Belnap belnap) {
@@ -128,5 +151,5 @@ Belnap operator||(Belnap arg1, Belnap arg2) {
 }
 
 int main() {
-
+	runTests();
 }
